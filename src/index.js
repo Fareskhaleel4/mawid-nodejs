@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import service from './service.mjs';
+
 const app = express()
-const port = 3000
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -9,6 +10,9 @@ app.get('/about', (req, res) => {
   res.send('About Page')
 })
 
-app.listen(port, () => {
+const port = service.port()
+const { db } = service.load()
+
+app.listen(port, '0.0.0.0', () => {
   console.log(`mawid is running on port ${port}`)
 })
